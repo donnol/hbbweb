@@ -6,6 +6,16 @@
 </head>
 <?php $id = $_GET["id"];?>
 <body>
+<?php 
+		session_start () ;
+		if (!isset ($_SESSION['shili'])){
+			echo "<p align=center>" ;
+			echo "<font color=#ff0000 size=5><strong><big>" ;
+			echo "You don't login,please<a href='index.php'>click here to login.</a>!" ;
+			echo "</big></strong></font></p>" ;
+			exit () ; 
+		 } 
+	?>
 	<div>
 		<form action="update2Userinfo.php?id=<?php echo $id;?>" method="post" name="updateuser">
 			<table border="1" align="center">
