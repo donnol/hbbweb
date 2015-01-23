@@ -18,7 +18,7 @@
 					
 					@$conn = mysql_connect("localhost:3310", "root", "root");
 					$db = mysql_select_db("book");
-					$sql = "select * from user where id='$id';";
+					$sql = "select * from users where id='$id';";
 					$query = mysql_query($sql);
 					$row = mysql_fetch_array($query);
 					//print_r($row);

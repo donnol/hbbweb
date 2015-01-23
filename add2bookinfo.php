@@ -20,12 +20,16 @@
 			//check the input char 
 			include("htmlEncode.php");
 			$decode_name = iterString($name);
+
+			if($page < 0){
+				header("Location:404.php");
+			}
 			
 			@$conn = mysql_connect("localhost:3310", "root", "root");
 			if($conn){
 				@$db = mysql_select_db("book");
 
-				$sql = "insert into book set id='$id', name='$decode_name', category='	$cate', page='$page', content='$content';";
+				$sql = "insert into book set id='$id', name='$decode_name', category='$cate', page='$page', content='$content';";
 				
 				$query = mysql_query($sql, $conn);
 				if($query){

@@ -26,7 +26,7 @@
 	$i = 0;
 	@$conn = mysql_connect("localhost:3310", "root", "root");
 	$db = mysql_select_db("book");
-	$sql1 = "select * from user";
+	$sql1 = "select * from users";
 	$query1 = mysql_query($sql1);
 	//echo "$query1";
 	while($row1 = mysql_fetch_array($query1)){

@@ -19,6 +19,11 @@
 		$shili_name=$_POST['username'] ;    //获取参数
 		$password=$_POST['pwd'] ;
 		
+		$sha1_pwd = sha1($password);
+		
+		$p = sha1('123');
+		echo "$p<br>";
+		
 		//encode the name from the user input
 		include("htmlEncode.php");
 		$decode_name = iterString($shili_name);
@@ -26,7 +31,7 @@
 		@$conn = mysql_connect("localhost:3310", "root", "root");
 		if(@$conn){
 			$db = mysql_select_db("book", $conn);
-			$sql = "select count(*) from user where name='$decode_name' and pwd = '$password' ;";
+			$sql = "select count(*) from users where name='$decode_name' and pwd = '$sha1_pwd' ;";
 			var_dump($sql);
 			$res = mysql_query($sql, $conn);
 			$row = mysql_fetch_array($res);

@@ -13,7 +13,7 @@
 		<?php
 			@$conn = mysql_connect("localhost:3310", "root", "root");
 			$db = mysql_select_db("book");
-			$sql = "select max(id) from user;";
+			$sql = "select max(id) from users;";
 			$query = mysql_query($sql);
 			$row = mysql_fetch_array($query);
 			//echo "$row[0]";

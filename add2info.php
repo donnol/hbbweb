@@ -14,6 +14,7 @@
 			$id = $_POST["id"];
 			$name = $_POST["name"];
 			$pwd = "123";
+			$sha1_pwd = sha1($pwd);
 			$tel = $_POST["tel"];
 			$addr = $_POST["addr"];
 			$cert = $_POST["cert"];
@@ -26,7 +27,7 @@
 			
 			@$conn = mysql_connect("localhost:3310", "root", "root");
 			@$db = mysql_select_db("book");
-			$sql = "insert into user set id='$id', name='$decode_name', pwd='$pwd', tel='$tel', addr='$addr', cert='$cert';";
+			$sql = "insert into users set id='$id', name='$decode_name', pwd='$sha1_pwd', tel='$tel', addr='$addr', cert='$cert';";
 			$query = mysql_query($sql, $conn);
 			
 			mysql_close($conn);

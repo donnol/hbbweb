@@ -16,7 +16,7 @@
 		
 		@$conn = mysql_connect("localhost:3310", "root", "root");
 		$db = mysql_select_db("book");
-		$sql = "delete from user where id='$id';";
+		$sql = "delete from users where id='$id';";
 		$query = mysql_query($sql);
 		
 		mysql_close($conn);

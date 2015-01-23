@@ -26,7 +26,7 @@
 			
 			@$conn = mysql_connect("localhost:3310", "root", "root");
 			@$db = mysql_select_db("book");
-			$sql = "update user set name='$decode_name', tel='$tel', addr='$addr', cert='$cert' where id='$id';";
+			$sql = "update users set name='$decode_name', tel='$tel', addr='$addr', cert='$cert' where id='$id';";
 			$query = mysql_query($sql, $conn);
 			
 			mysql_close($conn);
