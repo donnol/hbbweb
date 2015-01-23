@@ -7,14 +7,7 @@
 
 <body>
 <?php 
-		session_start () ;
-		if (!isset ($_SESSION['shili'])){
-			echo "<p align=center>" ;
-			echo "<font color=#ff0000 size=5><strong><big>" ;
-			echo "You don't login,please<a href='index.php'>click here to login.</a>!" ;
-			echo "</big></strong></font></p>" ;
-			exit () ; 
-		 } 
+		include("checkuser.php"); 
 	?>
 	<div style="background-color:#f1f2f3; padding:15px;"> 
 		<?php
@@ -24,17 +17,29 @@
 			$page = $_POST["page"];
 			$content = $_POST["content"];
 			
-			//echo "$id,$name,$pwd,$tel,$addr,$cert";
-			//echo "this is a add2info file.";
+			//check the input char 
+			include("htmlEncode.php");
+			$decode_name = iterString($name);
 			
 			@$conn = mysql_connect("localhost:3310", "root", "root");
-			@$db = mysql_select_db("book");
-			$sql = "insert into book set id='$id', name='$name', category='$cate', page='$page', content='$content';";
-			$query = mysql_query($sql, $conn);
-			
-			mysql_close($conn);
-			//header("Location:bookinfo.php");
-			echo  "<META     HTTP-EQUIV=\"Refresh\"     CONTENT=\"0; URL=bookinfo.php\">";
+			if($conn){
+				@$db = mysql_select_db("book");
+
+				$sql = "insert into book set id='$id', name='$decode_name', category='	$cate', page='$page', content='$content';";
+				
+				$query = mysql_query($sql, $conn);
+				if($query){
+				
+					mysql_close($conn);
+					header("Location:bookinfo.php");
+				}
+				else{
+					//echo "please check your id and name, they can not be same with the other have insert!";
+					mysql_close($conn);
+					header("location:404.php");
+				}
+				//echo  "<META     HTTP-EQUIV=\"Refresh\"     CONTENT=\"0; 			URL=bookinfo.php\">";
+			}
 		?>
 		
 	</div>

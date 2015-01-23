@@ -7,14 +7,7 @@
 
 <body>
 <?php 
-		session_start () ;
-		if (!isset ($_SESSION['shili'])){
-			echo "<p align=center>" ;
-			echo "<font color=#ff0000 size=5><strong><big>" ;
-			echo "You don't login,please<a href='index.php'>click here to login.</a>!" ;
-			echo "</big></strong></font></p>" ;
-			exit () ; 
-		 } 
+		include("checkuser.php"); 
 	?>
 	<div style="background-color:#f1f2f3; text-align:center; padding: 15px;">
 		<?php

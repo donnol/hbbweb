@@ -6,7 +6,7 @@
 </head>
 <body>
 	<div style="background-color:#f1f2f3;">
-		<!-- how bad the wechat's translate is! -->
+		<!-- how bad the wechat's translation is! -->
 		checking...
 	<div>
 	<?php 
@@ -19,15 +19,19 @@
 		$shili_name=$_POST['username'] ;    //获取参数
 		$password=$_POST['pwd'] ;
 		
+		//encode the name from the user input
+		include("htmlEncode.php");
+		$decode_name = iterString($shili_name);
+		
 		@$conn = mysql_connect("localhost:3310", "root", "root");
 		if(@$conn){
 			$db = mysql_select_db("book", $conn);
-			$sql = "select * from user where name='$shili_name';";
+			$sql = "select count(*) from user where name='$decode_name' and pwd = '$password' ;";
+			var_dump($sql);
 			$res = mysql_query($sql, $conn);
 			$row = mysql_fetch_array($res);
-			if($row["pwd"]==$password){
-				//session_register ("shili");
-				$_SESSION[shili] = $shili_name;
+			if($row[0]!=0){
+				$_SESSION['shili'] = $decode_name;
 				echo "<font color=red>success!</font>";
 				echo "or you can <a href='dashboard.php'>click here</a>";
 				header("Location:dashboard.php");

@@ -7,14 +7,7 @@
 
 <body>
 <?php 
-		session_start () ;
-		if (!isset ($_SESSION['shili'])){
-			echo "<p align=center>" ;
-			echo "<font color=#ff0000 size=5><strong><big>" ;
-			echo "You don't login,please<a href='index.php'>click here to login.</a>!" ;
-			echo "</big></strong></font></p>" ;
-			exit () ; 
-		 } 
+		include("checkuser.php"); 
 	?>
 	<div style="background-color:#f1f2f3; padding:15px;"> 
 		<?php
@@ -25,12 +18,15 @@
 			$addr = $_POST["addr"];
 			$cert = $_POST["cert"];
 			
+			include("htmlEncode.php");
+			$decode_name = iterString($name);
+			
 			echo "$id,$name,$pwd,$tel,$addr,$cert";
 			//echo "this is a add2info file.";
 			
 			@$conn = mysql_connect("localhost:3310", "root", "root");
 			@$db = mysql_select_db("book");
-			$sql = "insert into user set id='$id', name='$name', pwd='$pwd', tel='$tel', addr='$addr', cert='$cert';";
+			$sql = "insert into user set id='$id', name='$decode_name', pwd='$pwd', tel='$tel', addr='$addr', cert='$cert';";
 			$query = mysql_query($sql, $conn);
 			
 			mysql_close($conn);

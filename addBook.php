@@ -7,24 +7,21 @@
 
 <body>
 <?php 
-		session_start () ;
-		if (!isset ($_SESSION['shili'])){
-			echo "<p align=center>" ;
-			echo "<font color=#ff0000 size=5><strong><big>" ;
-			echo "You don't login,please<a href='index.php'>click here to login.</a>!" ;
-			echo "</big></strong></font></p>" ;
-			exit () ; 
-		 } 
+		include("checkuser.php"); 
 	?>
 	<div>
 	<?php
 			@$conn = mysql_connect("localhost:3310", "root", "root");
-			$db = mysql_select_db("book");
-			$sql = "select max(id) from book;";
-			$query = mysql_query($sql);
-			$row = mysql_fetch_array($query);
-			//echo "$row[0]";
-			$new_id = $row[0] + 1;
+			if($conn){
+				$db = mysql_select_db("book");
+				$sql = "select max(id) from book;";
+				$query = mysql_query($sql);
+				$row = mysql_fetch_array($query);
+				$new_id = $row[0] + 1;
+			}
+			else{
+				echo "connect to database failed!!!";
+			}
 		?>
 		<form action="add2bookinfo.php" method="post" name="addbook">
 			<table border="1" align="center">

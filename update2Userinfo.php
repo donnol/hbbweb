@@ -7,14 +7,7 @@
 
 <body>
 <?php 
-		session_start () ;
-		if (!isset ($_SESSION['shili'])){
-			echo "<p align=center>" ;
-			echo "<font color=#ff0000 size=5><strong><big>" ;
-			echo "You don't login,please<a href='index.php'>click here to login.</a>!" ;
-			echo "</big></strong></font></p>" ;
-			exit () ; 
-		 } 
+		include("checkuser.php"); 
 	?>
 	<div style="background-color:#f1f2f3; padding:15px;"> 
 		<?php
@@ -25,12 +18,15 @@
 			$addr = $_POST["addr"];
 			$cert = $_POST["cert"];
 			
+			include("htmlEncode.php");
+			$decode_name = iterString(%name);
+			
 			echo "$id,$name,$tel,$addr,$cert";
 			//echo "this is an update2userinfo file.";
 			
 			@$conn = mysql_connect("localhost:3310", "root", "root");
 			@$db = mysql_select_db("book");
-			$sql = "update user set name='$name', tel='$tel', addr='$addr', cert='$cert' where id='$id';";
+			$sql = "update user set name='$decode_name', tel='$tel', addr='$addr', cert='$cert' where id='$id';";
 			$query = mysql_query($sql, $conn);
 			
 			mysql_close($conn);
